@@ -29,6 +29,7 @@ main {
   justify-items: center;
   gap: 28px;
   text-align: center;
+  perspective: 700px;
 }
 
 h1,
@@ -43,25 +44,56 @@ h1 {
 }
 
 .coin {
+  position: relative;
   width: 150px;
   height: 150px;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border: 2px solid #fff;
   border-radius: 50%;
+  background: #000;
+  box-shadow: 0 14px 0 -10px rgba(255, 255, 255, 0.22);
   font-size: 4rem;
   font-weight: 700;
   line-height: 1;
   transform-style: preserve-3d;
-  will-change: transform;
+  will-change: transform, box-shadow;
+}
+
+.coin::before {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.coin::after {
+  position: absolute;
+  top: -20%;
+  left: -70%;
+  width: 48%;
+  height: 140%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: rotate(18deg);
 }
 
 .coin.flip-heads {
-  animation: flip-heads 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
+  animation: flip-heads 440ms cubic-bezier(0.2, 0.82, 0.26, 1);
 }
 
 .coin.flip-tails {
-  animation: flip-tails 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
+  animation: flip-tails 440ms cubic-bezier(0.2, 0.82, 0.26, 1);
+}
+
+.coin.flip-heads::after,
+.coin.flip-tails::after {
+  animation: shine 440ms ease-out;
 }
 
 .result {
@@ -114,37 +146,81 @@ noscript {
 
 @keyframes flip-heads {
   0% {
-    transform: translateY(0) rotateY(0deg) scale(1);
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 14px 0 -10px rgba(255, 255, 255, 0.22);
   }
-  42% {
-    transform: translateY(-22px) rotateY(540deg) scale(0.9);
+  18% {
+    transform: translate3d(-7px, -18px, 28px) rotateX(28deg) rotateY(250deg) rotateZ(-7deg) scale(0.96);
+    box-shadow: 9px 27px 0 -14px rgba(255, 255, 255, 0.14);
   }
-  76% {
-    transform: translateY(3px) rotateY(900deg) scale(1.06, 0.92);
+  44% {
+    transform: translate3d(7px, -34px, 50px) rotateX(-18deg) rotateY(610deg) rotateZ(8deg) scale(0.84, 1.08);
+    box-shadow: -8px 42px 0 -17px rgba(255, 255, 255, 0.09);
+  }
+  66% {
+    transform: translate3d(-3px, -13px, 20px) rotateX(18deg) rotateY(890deg) rotateZ(-4deg) scale(1.04, 0.94);
+    box-shadow: 5px 25px 0 -13px rgba(255, 255, 255, 0.15);
+  }
+  84% {
+    transform: translate3d(0, 5px, 0) rotateX(0deg) rotateY(1080deg) rotateZ(0deg) scale(1.1, 0.88);
+    box-shadow: 0 5px 0 -4px rgba(255, 255, 255, 0.3);
   }
   100% {
-    transform: translateY(0) rotateY(1080deg) scale(1);
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(1080deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 14px 0 -10px rgba(255, 255, 255, 0.22);
   }
 }
 
 @keyframes flip-tails {
   0% {
-    transform: translateY(0) rotateY(0deg) scale(1);
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 14px 0 -10px rgba(255, 255, 255, 0.22);
   }
-  42% {
-    transform: translateY(-22px) rotateY(-630deg) scale(0.9);
+  18% {
+    transform: translate3d(7px, -18px, 28px) rotateX(-28deg) rotateY(-250deg) rotateZ(7deg) scale(0.96);
+    box-shadow: -9px 27px 0 -14px rgba(255, 255, 255, 0.14);
   }
-  76% {
-    transform: translateY(3px) rotateY(-990deg) scale(1.06, 0.92);
+  44% {
+    transform: translate3d(-7px, -34px, 50px) rotateX(18deg) rotateY(-610deg) rotateZ(-8deg) scale(0.84, 1.08);
+    box-shadow: 8px 42px 0 -17px rgba(255, 255, 255, 0.09);
+  }
+  66% {
+    transform: translate3d(3px, -13px, 20px) rotateX(-18deg) rotateY(-890deg) rotateZ(4deg) scale(1.04, 0.94);
+    box-shadow: -5px 25px 0 -13px rgba(255, 255, 255, 0.15);
+  }
+  84% {
+    transform: translate3d(0, 5px, 0) rotateX(0deg) rotateY(-1260deg) rotateZ(0deg) scale(1.1, 0.88);
+    box-shadow: 0 5px 0 -4px rgba(255, 255, 255, 0.3);
   }
   100% {
-    transform: translateY(0) rotateY(-1260deg) scale(1);
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(-1260deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 14px 0 -10px rgba(255, 255, 255, 0.22);
+  }
+}
+
+@keyframes shine {
+  0%, 18% {
+    left: -70%;
+    opacity: 0;
+  }
+  34% {
+    opacity: 0.75;
+  }
+  72% {
+    left: 125%;
+    opacity: 0.25;
+  }
+  100% {
+    left: 125%;
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .coin.flip-heads,
-  .coin.flip-tails {
+  .coin.flip-tails,
+  .coin.flip-heads::after,
+  .coin.flip-tails::after {
     animation: none;
   }
 }
