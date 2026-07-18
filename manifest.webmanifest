@@ -1,0 +1,18 @@
+{
+  "name": "Secure Coin Flip",
+  "short_name": "Coin Flip",
+  "description": "A fair coin flip powered by cryptographically secure browser randomness.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
