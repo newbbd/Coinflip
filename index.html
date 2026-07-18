@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="A fair digital coin flip powered by the browser's cryptographically secure random number generator.">
+  <title>Secure Coin Flip</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Cryptographically secure</p>
+        <h1>Coin Flip</h1>
+      </div>
+      <button id="themeButton" class="icon-button" type="button" aria-label="Toggle color theme" title="Toggle color theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </header>
+
+    <section class="flip-card" aria-labelledby="resultLabel">
+      <div id="coin" class="coin" aria-hidden="true">
+        <div class="coin-face coin-heads">H</div>
+        <div class="coin-face coin-tails">T</div>
+      </div>
+
+      <div class="result-area" aria-live="polite" aria-atomic="true">
+        <p id="resultLabel" class="result-label">Ready</p>
+        <p id="resultText" class="result-text">Flip the coin</p>
+      </div>
+
+      <button id="flipButton" class="primary-button" type="button">
+        Flip coin
+        <span class="shortcut" aria-hidden="true">Space</span>
+      </button>
+
+      <p id="securityStatus" class="security-status" role="status">
+        Checking secure randomness...
+      </p>
+    </section>
+
+    <section class="stats-grid" aria-label="Flip statistics">
+      <article class="stat-card">
+        <span class="stat-name">Heads</span>
+        <strong id="headsCount">0</strong>
+        <span id="headsPercent" class="stat-percent">0%</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-name">Tails</span>
+        <strong id="tailsCount">0</strong>
+        <span id="tailsPercent" class="stat-percent">0%</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-name">Total</span>
+        <strong id="totalCount">0</strong>
+        <button id="resetButton" class="text-button" type="button">Reset</button>
+      </article>
+    </section>
+
+    <section class="details-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Recent results</p>
+          <h2>Flip history</h2>
+        </div>
+        <button id="copyButton" class="text-button" type="button" disabled>Copy proof</button>
+      </div>
+      <ol id="historyList" class="history-list">
+        <li class="empty-state">No flips yet</li>
+      </ol>
+    </section>
+
+    <details class="explanation-card">
+      <summary>How is the result generated?</summary>
+      <div class="explanation-content">
+        <p>The site requests a uniformly random 32-bit value from <code>crypto.getRandomValues()</code>, the browser's cryptographically secure random number generator. The final bit selects heads or tails, giving each result an equal probability.</p>
+        <p>The site does not use <code>Math.random()</code>, contact a server, or send flip results anywhere. If secure randomness is unavailable, flipping is disabled.</p>
+        <p>No software-only website can prove literal physical randomness. This implementation provides strong, unbiased digital randomness suitable for normal decisions and games.</p>
+      </div>
+    </details>
+
+    <footer>
+      <p>Runs locally in your browser. No tracking. No external dependencies.</p>
+    </footer>
+  </main>
+
+  <noscript>This website requires JavaScript to generate secure coin flips.</noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>
