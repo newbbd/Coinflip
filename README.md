@@ -28,7 +28,7 @@ A software-only website cannot prove literal physical randomness. Web Crypto pro
 
 ## GitHub Pages setup
 
-The included workflow deploys the site through GitHub Actions.
+The included workflow deploys the site through GitHub Actions. Every push to `main` triggers a fresh deployment.
 
 1. Open the repository on GitHub.
 2. Go to **Settings**, then **Pages**.
