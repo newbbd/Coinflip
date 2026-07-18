@@ -3,7 +3,6 @@
 const coin = document.querySelector('#coin');
 const result = document.querySelector('#result');
 const flipButton = document.querySelector('#flipButton');
-const status = document.querySelector('#status');
 
 let isFlipping = false;
 
@@ -20,10 +19,9 @@ function getSecureFlip() {
 }
 
 function finishFlip(outcome) {
-  const letter = outcome === 'HEADS' ? 'H' : 'T';
-  coin.textContent = letter;
+  coin.textContent = outcome === 'HEADS' ? 'H' : 'T';
   result.textContent = outcome;
-  coin.classList.remove('flipping');
+  coin.classList.remove('flip-heads', 'flip-tails');
   flipButton.disabled = false;
   isFlipping = false;
 }
@@ -39,18 +37,17 @@ function flip() {
   isFlipping = true;
   flipButton.disabled = true;
   result.textContent = '...';
-  coin.classList.remove('flipping');
+  coin.textContent = '?';
+  coin.classList.remove('flip-heads', 'flip-tails');
   void coin.offsetWidth;
-  coin.classList.add('flipping');
+  coin.classList.add(outcome === 'HEADS' ? 'flip-heads' : 'flip-tails');
 
-  window.setTimeout(() => finishFlip(outcome), reduceMotion ? 30 : 420);
+  window.setTimeout(() => finishFlip(outcome), reduceMotion ? 30 : 300);
 }
 
 if (!secureRandomAvailable()) {
   flipButton.disabled = true;
   result.textContent = 'UNAVAILABLE';
-  status.textContent = 'SECURE RANDOMNESS REQUIRED';
-  status.classList.add('error');
 }
 
 flipButton.addEventListener('click', flip);
