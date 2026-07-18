@@ -1,13 +1,11 @@
 'use strict';
 
-const CACHE_NAME = 'secure-coinflip-v1';
+const CACHE_NAME = 'secure-coinflip-v2';
 const APP_FILES = [
   './',
   './index.html',
   './styles.css',
-  './app.js',
-  './manifest.webmanifest',
-  './icon.svg'
+  './app.js'
 ];
 
 self.addEventListener('install', (event) => {
