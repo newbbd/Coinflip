@@ -42,7 +42,7 @@ function flip() {
   void coin.offsetWidth;
   coin.classList.add(outcome === 'HEADS' ? 'flip-heads' : 'flip-tails');
 
-  window.setTimeout(() => finishFlip(outcome), reduceMotion ? 30 : 300);
+  window.setTimeout(() => finishFlip(outcome), reduceMotion ? 30 : 440);
 }
 
 if (!secureRandomAvailable()) {
