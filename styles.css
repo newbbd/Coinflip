@@ -20,6 +20,7 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 main {
@@ -51,10 +52,16 @@ h1 {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.coin.flipping {
-  animation: flip 420ms linear;
+.coin.flip-heads {
+  animation: flip-heads 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
+}
+
+.coin.flip-tails {
+  animation: flip-tails 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
 }
 
 .result {
@@ -76,12 +83,17 @@ button {
   font-weight: 700;
   letter-spacing: 0.16em;
   cursor: pointer;
+  transition: transform 80ms ease, background 80ms ease, color 80ms ease;
 }
 
 button:hover:not(:disabled),
 button:focus-visible {
   background: #000;
   color: #fff;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.96);
 }
 
 button:focus-visible {
@@ -94,33 +106,45 @@ button:disabled {
   opacity: 0.45;
 }
 
-.status {
-  color: #777;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-}
-
-.status.error {
-  color: #fff;
-}
-
 noscript {
   position: fixed;
   bottom: 20px;
   font-size: 0.75rem;
 }
 
-@keyframes flip {
-  from {
-    transform: rotateY(0deg);
+@keyframes flip-heads {
+  0% {
+    transform: translateY(0) rotateY(0deg) scale(1);
   }
-  to {
-    transform: rotateY(720deg);
+  42% {
+    transform: translateY(-22px) rotateY(540deg) scale(0.9);
+  }
+  76% {
+    transform: translateY(3px) rotateY(900deg) scale(1.06, 0.92);
+  }
+  100% {
+    transform: translateY(0) rotateY(1080deg) scale(1);
+  }
+}
+
+@keyframes flip-tails {
+  0% {
+    transform: translateY(0) rotateY(0deg) scale(1);
+  }
+  42% {
+    transform: translateY(-22px) rotateY(-630deg) scale(0.9);
+  }
+  76% {
+    transform: translateY(3px) rotateY(-990deg) scale(1.06, 0.92);
+  }
+  100% {
+    transform: translateY(0) rotateY(-1260deg) scale(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .coin.flipping {
+  .coin.flip-heads,
+  .coin.flip-tails {
     animation: none;
   }
 }
