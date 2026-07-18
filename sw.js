@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'secure-coinflip-v5';
+const CACHE_NAME = 'secure-coinflip-v6';
 const APP_FILES = [
   './',
   './index.html',
