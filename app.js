@@ -18,8 +18,13 @@ function getSecureFlip() {
   return value[0] % 2 === 0 ? 'HEADS' : 'TAILS';
 }
 
+function applyFace(outcome) {
+  coin.classList.remove('face-heads', 'face-tails', 'is-unknown');
+  coin.classList.add(outcome === 'HEADS' ? 'face-heads' : 'face-tails');
+}
+
 function finishFlip(outcome) {
-  coin.textContent = outcome === 'HEADS' ? 'H' : 'T';
+  applyFace(outcome);
   result.textContent = outcome;
   coin.classList.remove('flip-heads', 'flip-tails');
   flipButton.disabled = false;
@@ -37,8 +42,8 @@ function flip() {
   isFlipping = true;
   flipButton.disabled = true;
   result.textContent = '...';
-  coin.textContent = '?';
-  coin.classList.remove('flip-heads', 'flip-tails');
+  coin.classList.remove('face-heads', 'face-tails', 'is-unknown', 'flip-heads', 'flip-tails');
+  coin.classList.add('is-unknown');
   void coin.offsetWidth;
   coin.classList.add(outcome === 'HEADS' ? 'flip-heads' : 'flip-tails');
 
@@ -53,9 +58,23 @@ if (!secureRandomAvailable()) {
 flipButton.addEventListener('click', flip);
 
 document.addEventListener('keydown', (event) => {
+  if (event.repeat) {
+    return;
+  }
+
   if (event.code === 'Space') {
     event.preventDefault();
     flip();
+    return;
+  }
+
+  if (event.key === '1') {
+    window.location.href = './';
+    return;
+  }
+
+  if (event.key === '3') {
+    window.location.href = 'three-way.html';
   }
 });
 
