@@ -5,6 +5,8 @@
 :root {
   color-scheme: dark;
   font-family: Arial, Helvetica, sans-serif;
+  --coin-heads-image: url("./assets/coin-heads.svg");
+  --coin-tails-image: url("./assets/coin-tails.svg");
 }
 
 html,
@@ -27,19 +29,8 @@ main {
   width: min(100% - 40px, 360px);
   display: grid;
   justify-items: center;
-  gap: 28px;
+  gap: 20px;
   text-align: center;
-}
-
-h1,
-p {
-  margin: 0;
-}
-
-h1 {
-  font-size: 0.8rem;
-  font-weight: 400;
-  letter-spacing: 0.28em;
 }
 
 .mode-nav {
@@ -67,23 +58,72 @@ h1 {
   color: #000;
 }
 
-.mode-nav a:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 4px;
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
 }
 
 .coin {
-  width: 150px;
-  height: 150px;
+  position: relative;
+  width: 180px;
+  height: 180px;
   display: grid;
   place-items: center;
-  border: 2px solid #fff;
+  border: 0;
   border-radius: 50%;
-  font-size: 4rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.95);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.coin::after {
+  position: absolute;
+  inset: -12px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04) 45%, transparent 72%);
+  content: "";
+  filter: blur(6px);
+}
+
+.coin-face,
+.coin-face.face-heads {
+  background-image: var(--coin-heads-image);
+}
+
+.coin-face.face-tails {
+  background-image: var(--coin-tails-image);
+}
+
+.coin-face.is-unknown {
+  background-image: var(--coin-heads-image);
+  opacity: 0.58;
+  filter: grayscale(1) brightness(0.92);
+}
+
+.picker-token {
+  background-image: var(--coin-tails-image);
+}
+
+.picker-token .picker-value {
+  font-size: 4.2rem;
   font-weight: 700;
   line-height: 1;
-  transform-style: preserve-3d;
-  will-change: transform;
+}
+
+.picker-token.is-unknown {
+  opacity: 0.58;
+  filter: grayscale(1) brightness(0.92);
 }
 
 .coin.flip-heads {
@@ -103,6 +143,18 @@ h1 {
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
+}
+
+.shortcuts {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  opacity: 0.68;
+}
+
+kbd {
+  padding: 2px 5px;
+  border: 1px solid #fff;
+  font: inherit;
 }
 
 button {
@@ -130,7 +182,8 @@ button:active:not(:disabled) {
   transform: scale(0.96);
 }
 
-button:focus-visible {
+button:focus-visible,
+.mode-nav a:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 4px;
 }
@@ -147,48 +200,24 @@ noscript {
 }
 
 @keyframes flip-heads {
-  0% {
-    transform: translateY(0) rotateY(0deg) scale(1);
-  }
-  42% {
-    transform: translateY(-22px) rotateY(540deg) scale(0.9);
-  }
-  76% {
-    transform: translateY(3px) rotateY(900deg) scale(1.06, 0.92);
-  }
-  100% {
-    transform: translateY(0) rotateY(1080deg) scale(1);
-  }
+  0% { transform: translateY(0) rotateY(0deg) scale(1); }
+  42% { transform: translateY(-22px) rotateY(540deg) scale(0.9); }
+  76% { transform: translateY(3px) rotateY(900deg) scale(1.06, 0.92); }
+  100% { transform: translateY(0) rotateY(1080deg) scale(1); }
 }
 
 @keyframes flip-tails {
-  0% {
-    transform: translateY(0) rotateY(0deg) scale(1);
-  }
-  42% {
-    transform: translateY(-22px) rotateY(-630deg) scale(0.9);
-  }
-  76% {
-    transform: translateY(3px) rotateY(-990deg) scale(1.06, 0.92);
-  }
-  100% {
-    transform: translateY(0) rotateY(-1260deg) scale(1);
-  }
+  0% { transform: translateY(0) rotateY(0deg) scale(1); }
+  42% { transform: translateY(-22px) rotateY(-630deg) scale(0.9); }
+  76% { transform: translateY(3px) rotateY(-990deg) scale(1.06, 0.92); }
+  100% { transform: translateY(0) rotateY(-1260deg) scale(1); }
 }
 
 @keyframes pick-three {
-  0% {
-    transform: translateY(0) rotateZ(0deg) scale(1);
-  }
-  35% {
-    transform: translateY(-18px) rotateZ(-12deg) scale(0.9);
-  }
-  70% {
-    transform: translateY(3px) rotateZ(9deg) scale(1.07, 0.93);
-  }
-  100% {
-    transform: translateY(0) rotateZ(0deg) scale(1);
-  }
+  0% { transform: translateY(0) rotateZ(0deg) scale(1); }
+  35% { transform: translateY(-18px) rotateZ(-12deg) scale(0.9); }
+  70% { transform: translateY(3px) rotateZ(9deg) scale(1.07, 0.93); }
+  100% { transform: translateY(0) rotateZ(0deg) scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
