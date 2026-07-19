@@ -1,6 +1,7 @@
 'use strict';
 
 const picker = document.querySelector('#picker');
+const pickerValue = document.querySelector('#pickerValue');
 const result = document.querySelector('#result');
 const pickButton = document.querySelector('#pickButton');
 
@@ -24,9 +25,9 @@ function getSecureThreeWayPick() {
 }
 
 function finishPick(choice) {
-  picker.textContent = String(choice);
+  picker.classList.remove('is-unknown', 'picking');
+  pickerValue.textContent = String(choice);
   result.textContent = `OPTION ${choice}`;
-  picker.classList.remove('picking');
   pickButton.disabled = false;
   isPicking = false;
 }
@@ -42,8 +43,9 @@ function pick() {
   isPicking = true;
   pickButton.disabled = true;
   result.textContent = '...';
-  picker.textContent = '?';
+  pickerValue.textContent = '?';
   picker.classList.remove('picking');
+  picker.classList.add('is-unknown');
   void picker.offsetWidth;
   picker.classList.add('picking');
 
@@ -58,9 +60,23 @@ if (!secureRandomAvailable()) {
 pickButton.addEventListener('click', pick);
 
 document.addEventListener('keydown', (event) => {
+  if (event.repeat) {
+    return;
+  }
+
   if (event.code === 'Space') {
     event.preventDefault();
     pick();
+    return;
+  }
+
+  if (event.key === '1') {
+    window.location.href = './';
+    return;
+  }
+
+  if (event.key === '3') {
+    window.location.href = 'three-way.html';
   }
 });
 
