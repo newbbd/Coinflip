@@ -18,13 +18,8 @@ function getSecureFlip() {
   return value[0] % 2 === 0 ? 'HEADS' : 'TAILS';
 }
 
-function applyFace(outcome) {
-  coin.classList.remove('face-heads', 'face-tails', 'is-unknown');
-  coin.classList.add(outcome === 'HEADS' ? 'face-heads' : 'face-tails');
-}
-
 function finishFlip(outcome) {
-  applyFace(outcome);
+  coin.textContent = outcome === 'HEADS' ? 'H' : 'T';
   result.textContent = outcome;
   coin.classList.remove('flip-heads', 'flip-tails');
   flipButton.disabled = false;
@@ -42,8 +37,8 @@ function flip() {
   isFlipping = true;
   flipButton.disabled = true;
   result.textContent = '...';
-  coin.classList.remove('face-heads', 'face-tails', 'is-unknown', 'flip-heads', 'flip-tails');
-  coin.classList.add('is-unknown');
+  coin.textContent = '?';
+  coin.classList.remove('flip-heads', 'flip-tails');
   void coin.offsetWidth;
   coin.classList.add(outcome === 'HEADS' ? 'flip-heads' : 'flip-tails');
 
