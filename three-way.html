@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A minimal cryptographically secure three-way random picker.">
+  <title>Three Way</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <nav class="mode-nav" aria-label="Random picker mode">
+      <a href="./">COIN</a>
+      <a class="active" href="three-way.html" aria-current="page">THREE WAY</a>
+    </nav>
+
+    <h1>THREE WAY</h1>
+
+    <div id="picker" class="coin" aria-hidden="true">?</div>
+
+    <p id="result" class="result" aria-live="polite">READY</p>
+
+    <button id="pickButton" type="button">PICK</button>
+  </main>
+
+  <noscript>JavaScript is required.</noscript>
+  <script src="three-way.js" defer></script>
+  <script src="oneko.js" defer></script>
+</body>
+</html>
