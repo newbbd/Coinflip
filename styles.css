@@ -42,6 +42,36 @@ h1 {
   letter-spacing: 0.28em;
 }
 
+.mode-nav {
+  display: flex;
+  border: 1px solid #fff;
+}
+
+.mode-nav a {
+  padding: 8px 11px;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.mode-nav a + a {
+  border-left: 1px solid #fff;
+}
+
+.mode-nav a.active,
+.mode-nav a:hover,
+.mode-nav a:focus-visible {
+  background: #fff;
+  color: #000;
+}
+
+.mode-nav a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
 .coin {
   width: 150px;
   height: 150px;
@@ -62,6 +92,10 @@ h1 {
 
 .coin.flip-tails {
   animation: flip-tails 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
+}
+
+.coin.picking {
+  animation: pick-three 300ms cubic-bezier(0.18, 0.8, 0.28, 1);
 }
 
 .result {
@@ -142,9 +176,25 @@ noscript {
   }
 }
 
+@keyframes pick-three {
+  0% {
+    transform: translateY(0) rotateZ(0deg) scale(1);
+  }
+  35% {
+    transform: translateY(-18px) rotateZ(-12deg) scale(0.9);
+  }
+  70% {
+    transform: translateY(3px) rotateZ(9deg) scale(1.07, 0.93);
+  }
+  100% {
+    transform: translateY(0) rotateZ(0deg) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .coin.flip-heads,
-  .coin.flip-tails {
+  .coin.flip-tails,
+  .coin.picking {
     animation: none;
   }
 }
