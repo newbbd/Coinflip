@@ -5,7 +5,7 @@
 :root {
   color-scheme: dark;
   font-family: Arial, Helvetica, sans-serif;
-  --coin-heads-image: url("./assets/coin-heads.svg");
+  --coin-heads-image: url("./assets/coin-heads-v2.svg");
   --coin-tails-image: url("./assets/coin-tails.svg");
 }
 
