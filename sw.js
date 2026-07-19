@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'secure-coinflip-v9';
+const CACHE_NAME = 'secure-coinflip-v10';
 const APP_FILES = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ const APP_FILES = [
   './app.js',
   './three-way.js',
   './oneko.js',
-  './assets/coin-heads.svg',
+  './assets/coin-heads-v2.svg',
   './assets/coin-tails.svg',
   './manifest.webmanifest',
   './icon.svg'
