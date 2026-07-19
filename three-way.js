@@ -1,7 +1,6 @@
 'use strict';
 
 const picker = document.querySelector('#picker');
-const pickerValue = document.querySelector('#pickerValue');
 const result = document.querySelector('#result');
 const pickButton = document.querySelector('#pickButton');
 
@@ -25,9 +24,9 @@ function getSecureThreeWayPick() {
 }
 
 function finishPick(choice) {
-  picker.classList.remove('is-unknown', 'picking');
-  pickerValue.textContent = String(choice);
+  picker.textContent = String(choice);
   result.textContent = `OPTION ${choice}`;
+  picker.classList.remove('picking');
   pickButton.disabled = false;
   isPicking = false;
 }
@@ -43,9 +42,8 @@ function pick() {
   isPicking = true;
   pickButton.disabled = true;
   result.textContent = '...';
-  pickerValue.textContent = '?';
+  picker.textContent = '?';
   picker.classList.remove('picking');
-  picker.classList.add('is-unknown');
   void picker.offsetWidth;
   picker.classList.add('picking');
 
